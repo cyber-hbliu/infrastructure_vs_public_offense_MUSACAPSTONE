@@ -502,8 +502,8 @@ d3.json("assets/web_data/tracts.geojson").then(function(geo){
   var titleEl = document.getElementById("map-title");
   var eyebrowEl = document.getElementById("map-eyebrow");
   var retina = (window.devicePixelRatio || 1) > 1 ? "@2x" : "";
-  var TILE_BASE   = "https://basemaps.cartocdn.com/rastertiles/light_nolabels/";
-  var TILE_LABELS = "https://basemaps.cartocdn.com/rastertiles/light_only_labels/";
+  var TILE_BASE   = "https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/";
+  var TILE_LABELS = "https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Reference/MapServer/tile/";
 
   var feats = geo.features;
   var counts = feats.map(function(f){return +f.properties.incidents || 0;});
@@ -592,7 +592,7 @@ d3.json("assets/web_data/tracts.geojson").then(function(geo){
   }
 
   function tileURL(base){
-    return function(d){ return base + d[2] + "/" + d[0] + "/" + d[1] + retina + ".png"; };
+    return function(d){ return base + d[2] + "/" + d[1] + "/" + d[0]; };
   }
   function placeTiles(g, tiles, base){
     var k = tiles.scale;
